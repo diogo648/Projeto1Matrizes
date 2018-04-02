@@ -11,5 +11,5 @@ void TransporMatriz();
 void SomarMatriz();
 void DividirMatriz();
 void MultiplicarMatriz();
-void Mutliplacar2Matrizes();
+void Mutliplicar2Matrizes();
 
