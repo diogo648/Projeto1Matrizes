@@ -2,14 +2,23 @@
 #include<stdlib.h>
 #include "matriz.h"
 
-void DeclararMatriz(){
+int DeclararMatriz(int linhas, int colunas){
 
-
+  int **Matriz; 
+ 	int i;
+ 	
+	Matriz = (int*)malloc(linhas*sizeof(int*));
+ 	for (i = 0; i < linhas; ++i)
+	{
+ 		Matriz[i] = (int*)malloc(colunas*sizeof(int));
+	}
+  
+  return Matriz;
 }
 
-
-void DestruirMatriz(){
-
+void DestruirMatriz(Matriz[][]){
+  
+  free(Matriz);
 
 }
 
