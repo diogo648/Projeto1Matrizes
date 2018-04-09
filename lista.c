@@ -3,7 +3,7 @@
 #include "lista.h"
 
 
-typedef mno no;
+typedef mno No;
 
 struct mno{
 
@@ -12,5 +12,18 @@ struct mno{
 	struct no *prox;
 };
 
+void AdicionarNo(No **mLista,char nomeMatriz[50]){
 
+No *aux = (No*) malloc(sizeof(No));
+
+
+	
+
+}
+
+
+void RemoverNo(No **mLista, char nomeMatriz[50]){
+
+
+}
 
