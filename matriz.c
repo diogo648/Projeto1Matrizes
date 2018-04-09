@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "matriz.h"
-
+//
 int DeclararMatriz(int linhas, int colunas){
 
   int **Matriz; 
