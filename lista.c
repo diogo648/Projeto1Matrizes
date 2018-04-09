@@ -7,7 +7,10 @@ typedef mno no;
 
 struct mno{
 
-	char nome[50];
+	char nomeMatriz[50];
 	int dimensao[2]; 
 	struct no *prox;
 };
+
+
+
