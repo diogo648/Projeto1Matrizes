@@ -7,7 +7,7 @@ int DeclararMatriz(int linhas, int colunas){
   int **Matriz; 
  	int i;
  	
-	Matriz = (int*)malloc(linhas*sizeof(int*));
+	Matriz=(int**)malloc(linhas*sizeof(int*));
  	for (i = 0; i < linhas; ++i)
 	{
  		Matriz[i] = (int*)malloc(colunas*sizeof(int));
