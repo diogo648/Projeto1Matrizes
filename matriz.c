@@ -16,9 +16,14 @@ int DeclararMatriz(int linhas, int colunas){
   return Matriz;
 }
 
-void DestruirMatriz(Matriz[][]){
+void DestruirMatriz(int linhas, int colunas, int Matriz[][]){
   
-  free(Matriz);
+ for (i = 0; i < linhas; ++i)
+	{
+		free(Matriz[i]);
+	};
+
+	free(Matriz);
 
 }
 
