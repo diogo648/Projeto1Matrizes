@@ -40,8 +40,20 @@ void ImprimirMatriz(int linhas, int colunas,int Matriz[][]){
 
 }
 
-void AtribuirEleMatriz(){
+Matriz AtribuirEleMatriz(int Matriz[][],int linhas, int colunas, int n){
+	
+	int n, linha, coluna;
+	printf("linha =");
+	scanf("%d",&linha);
+	printf("coluna =");
+	scanf("%d",&coluna);
+	printf("n = ");
+	scanf("%d",&n);
+	
 
+	Matriz[linha-1][coluna-1]=n;
+	
+	return Matriz;
 
 }
 
@@ -57,9 +69,34 @@ void AtribuirColMatriz(){
 
 }
 
-void TransporMatriz(){
+Matriz TransporMatriz(int linhas, int colunas, int Matriz[][], char nome[50]){
+	
+	int **Matriz1;
+	Matriz1=(int**)malloc(linhas*sizeof(int*));
 
+ 	for (i = 0; i < linhas; ++i)
+	{
+		Matriz1[i]=(int*)malloc(colunas*sizeof(int));
+	}
+	
+	for (i = 0; i < linhas; i++)
+	{
+ 		for (j = 0; j < colunas; j++)
+		{
+ 			Matriz1[j][i]=Matriz[i][j];
+		}
+	}
 
+	for (i = 0; i < linhas; i++)
+	{
+ 		for (j = 0; j < colunas; j++)
+		{
+ 			printf(" %d ",Matriz1[i][j]);
+		}
+		printf("\n");
+	}
+	
+	return Matriz;
 }
 
 void SomarMatriz(){
