@@ -99,9 +99,25 @@ Matriz TransporMatriz(int linhas, int colunas, int Matriz[][], char nome[50]){
 	return Matriz;
 }
 
-void SomarMatriz(){
+Matriz SomarMatriz(int linhas, int colunas,int Matriz[],int Matriz1){
 
+	int **aux;
+	
+	aux=(int**)malloc(linhas*sizeof(int*));
 
+ 	for (i = 0; i < linhas; ++i)
+	{
+		aux[i]=(int*)malloc(colunas*sizeof(int));
+	}
+	
+	for (i = 0; i < linhas; i++)
+	{
+ 		for (j = 0; j < colunas; j++)
+		{
+ 			aux[i][j] = Matriz1[i][j]+Matriz[i][j];
+		}
+	}
+	return aux;
 }
 
 void DividirMatriz(){
@@ -114,8 +130,25 @@ void MUltiplicarMatriz(){
 
 }
 
-void MUltiplicar2Matrizes(){
+void MUltiplicar2Matrizes(int linhas, int colunas,int Matriz[],int Matriz1){
+	
+	int **aux;
+	
+	aux=(int**)malloc(linhas*sizeof(int*));
 
+ 	for (i = 0; i < linhas; ++i)
+	{
+		aux[i]=(int*)malloc(colunas*sizeof(int));
+	}
+	
+	for (i = 0; i < linhas; i++)
+	{
+ 		for (j = 0; j < colunas; j++)
+		{
+ 			aux[i][j] = Matriz1[i][j]*Matriz[i][j];
+		}
+	}
+	return aux;
 
 }
 
