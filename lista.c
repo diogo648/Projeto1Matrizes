@@ -8,31 +8,32 @@ typedef mno No;
 struct mno{
 
 	char nomeMatriz[50];
-	int dimensao[2];
+	int linhas;
+	int colunas;
 	int matriz[][];
 	struct no *prox;
 };
 
-void AdicionarNo(No **mLista,char nomeMatriz[50],dimensao[2]){
+void AdicionarNo(No **mLista,char nomeMatriz[50],int linha,int coluna){
 
 	if(mLista == NULL){
 	No *aux = (No*) malloc(sizeof(No));
 	strcpy(nomeMatriz,aux->nomeMatriz);
-	aux->dimensao[0] = dimensao[0];
-	aux->dimensao[1] = dimensao[1];
-	aux->matriz = DeclararMatriz(dimensao[0],dimensao[1]);
+	aux->linhas = linha;
+	aux->colunas = coluna;
+	aux->matriz = DeclararMatriz(linha,coluna);
 	aux->prox = NULL;
 	*mLista = aux;
 	}
 	else{
-		AdicionarNo(&(*mLista)->prox,nomeMatriz,dimensao);
+		AdicionarNo(&(*mLista)->prox,nomeMatriz,linha,coluna);
 	}
 
 }
 
 
 void RemoverNo(No **mLista, char nomeMatriz[50]){
-
+	
 
 }
 
