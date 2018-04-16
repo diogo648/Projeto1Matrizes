@@ -121,8 +121,25 @@ Matriz SomarMatriz(int linhas, int colunas,int Matriz[],int Matriz1){
 }
 
 void DividirMatriz(){
+	
+	int **aux;
+	
+	aux=(int**)malloc(linhas*sizeof(int*));
 
-
+ 	for (i = 0; i < linhas; ++i)
+	{
+		aux[i]=(int*)malloc(colunas*sizeof(int));
+	}
+	
+	for (i = 0; i < linhas; i++)
+	{
+ 		for (j = 0; j < colunas; j++)
+		{
+ 			aux[i][j] = Matriz1[i][j]/Matriz[i][j];
+		}
+	}
+	return aux;
+	
 }
 
 void MUltiplicarMatriz(){
