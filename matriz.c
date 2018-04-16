@@ -22,8 +22,16 @@ void DestruirMatriz(Matriz[][]){
 
 }
 
-void ImprimirMatriz(){
-
+void ImprimirMatriz(int linhas, int colunas,int Matriz[][]){
+	
+	for (i = 0; i < linhas; i++)
+	{
+ 		for (j = 0; j < colunas; j++)
+		{
+ 			printf(" %d ",Matriz[i][j]);
+		}
+		printf("\n");
+	}
 
 }
 
