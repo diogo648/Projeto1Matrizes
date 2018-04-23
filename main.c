@@ -97,10 +97,5 @@ No *lista;
 	   exit(0);
 	  break;
 	}
-	
-
-
-
-}
 
 }
