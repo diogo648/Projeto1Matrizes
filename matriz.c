@@ -27,17 +27,31 @@ void DestruirMatriz(int linhas, int colunas, int Matriz[][]){
 
 }
 
-void ImprimirMatriz(int linhas, int colunas,int Matriz[][]){
-	
-	for (i = 0; i < linhas; i++)
-	{
- 		for (j = 0; j < colunas; j++)
-		{
- 			printf(" %d ",Matriz[i][j]);
-		}
-		printf("\n");
-	}
+void ImprimirMatriz(No **Matriz, char nome[]) {
 
+	int i, j;
+
+	if (Matriz == NULL)
+	{
+		printf("Matriz não encontrada\n");
+	}
+	else if (strcmp((*Matriz)->nomeMatriz, nome) == 0)
+	{
+
+		for (i = 0; i < (*Matriz)->linhas; i++)
+		{
+			for (j = 0; j < (*Matriz)->colunas; j++)
+			{
+				printf("%6.2d", (*Matriz)->matriz[i][j]);
+				
+			}
+			printf("\n");
+		}
+	}
+	else
+	{
+		ImprimirMatriz(&(*Matriz)->prox, nome);
+	}
 }
 
 Matriz AtribuirEleMatriz(int Matriz[][],int linhas, int colunas, int n){
