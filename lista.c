@@ -14,6 +14,11 @@ struct mno{
 	struct no *prox;
 };
 
+void CriaVazia(No **Lista)
+{
+	*Lista = NULL;
+}
+
 void AdicionarNo(No **mLista,char nomeMatriz[50],int linha,int coluna){
 
 	if(mLista == NULL){
