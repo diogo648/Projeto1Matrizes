@@ -54,20 +54,36 @@ void ImprimirMatriz(No **Matriz, char nome[]) {
 	}
 }
 
-Matriz AtribuirEleMatriz(int Matriz[][],int linhas, int colunas, int n){
-	
-	int n, linha, coluna;
-	printf("linha =");
-	scanf("%d",&linha);
-	printf("coluna =");
-	scanf("%d",&coluna);
-	printf("n = ");
-	scanf("%d",&n);
-	
+void AtribuirEleMatriz(No **Matriz,char nome[], int n) {
 
-	Matriz[linha-1][coluna-1]=n;
-	
-	return Matriz;
+	int linha, coluna, i, j;
+
+	if (Matriz == NULL)
+	{
+		printf("Matriz não encontrada\n");
+	}
+	else if (strcmp((*Matriz)->nomeMatriz, nome) == 0)
+	{
+		printf("linha =");
+		scanf("%d", &linha);
+		printf("coluna =");
+		scanf("%d", &coluna);
+		printf("n = ");
+		scanf("%d", &n);
+
+		if (linha > (*Matriz)->linhas || coluna > (*Matriz)->colunas)
+		{
+			printf("Erro: Posicao maior do que dimensoes\n");
+		}
+		else
+		{
+			(*Matriz)->matriz[linha - 1][coluna - 1] = n;
+		}
+	}
+	else
+	{
+		AtribuirEleMatriz(&(*Matriz)->prox, nome, 7);
+	}
 
 }
 
