@@ -3,10 +3,18 @@
 
 typedef struct mno No;
 
-void CriaVazia(No **lista);
-void AdicionarNo(No **mLista, char nomeMatriz[], int linha, int coluna);
-void removerNo(No **mLista, char nomeMatriz[]);
-void CriaNova(No **Matriz, int **matrizNova, char nome[], int linha, int coluna);
-No *Percorre(No **Matriz, char nome[]);
+struct mno {
+
+	char nomeMatriz[50];
+	int linhas;
+	int colunas;
+	float **matriz;
+	No *prox;
+};
+
+void CriaVazia(No **Lista);
+void AdicionarNo(No **Lista, float **matrizNova, char nome[], int linha, int coluna);
+void RemoverNo(No **Lista, char nomeMatriz[]);
+No *Percorre(No **Lista, char nome[]);
 
 #endif
