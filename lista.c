@@ -3,74 +3,57 @@
 #include <string.h>
 #include "lista.h"
 
-typedef mno No;
-
-struct mno {
-
-	char nomeMatriz[50];
-	int linhas;
-	int colunas;
-	int **matriz;
-	No *prox;
-};
 
 void CriaVazia(No **Lista)
 {
 	*Lista = NULL;
 }
 
-void AdicionarNo(No **mLista, char nomeMatriz[], int linha, int coluna) {
 
-	if (*mLista == NULL) {
-		No *aux = (No*)malloc(sizeof(No));
-		strcpy(aux->nomeMatriz, nomeMatriz);
-		aux->linhas = linha;
-		aux->colunas = coluna;
-		aux->matriz = DeclararMatriz(linha, coluna);
-		aux->prox = NULL;
-		*mLista = aux;
-		printf("OK\n\n");
-	}
-	else {
-		AdicionarNo(&(*mLista)->prox, nomeMatriz, linha, coluna);
-	}
+void RemoverNo(No **Lista, char nomeMatriz[]) {
 
-}
+	No *aux;
 
-
-void RemoverNo(No **mLista, char nomeMatriz[50]){
-	
-
-}
-
-No *Percorre(No **Matriz, char nome[]) {
-
-	if (*Matriz == NULL)
+	if (strcmp((*Lista)->nomeMatriz, nomeMatriz) == 0)
 	{
-		return NULL;
-	}
-	else if (strcmp((*Matriz)->nomeMatriz, nome) == 0)
-	{
-		return *Matriz;
+		aux = *Lista;
+		*Lista = (*Lista)->prox;
+		free(aux);
 	}
 	else
 	{
-		Percorre(&(*Matriz)->prox, nome);
+		RemoverNo(&(*Lista)->prox, nomeMatriz);
 	}
 }
 
-void CriaNova(No **Matriz, int **matrizNova, char nome[], int linha, int coluna)
+No *Percorre(No **Lista, char nome[]) {
+
+	if (*Lista == NULL)
+	{
+		return NULL;
+	}
+	else if (strcmp((*Lista)->nomeMatriz, nome) == 0)
+	{
+		return *Lista;
+	}
+	else
+	{
+		Percorre(&(*Lista)->prox, nome);
+	}
+}
+
+void AdicionarNo(No **Lista, float **matrizNova, char nome[], int linha, int coluna)
 {
-	if (*Matriz == NULL) {
+	if (*Lista == NULL) {
 		No *aux = (No*)malloc(sizeof(No));
 		strcpy(aux->nomeMatriz, nome);
 		aux->linhas = linha;
 		aux->colunas = coluna;
 		aux->matriz = matrizNova;
 		aux->prox = NULL;
-		*Matriz = aux;
+		*Lista = aux;
 	}
 	else {
-		CriaNova(&(*Matriz)->prox, matrizNova, nome, linha, coluna);
+		AdicionarNo(&(*Lista)->prox, matrizNova, nome, linha, coluna);
 	}
 }
