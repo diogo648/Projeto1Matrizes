@@ -2,292 +2,193 @@
 #include<stdlib.h>
 #include "matriz.h"
 
-int **DeclararMatriz(int linhas, int colunas) {
+float **DeclararMatriz(int linhas, int colunas) {
 
-	int **Matriz;
-	int i;
+	float **Matriz;
+	int i, j;
 
-	Matriz = (int**)malloc(linhas*sizeof(int*));
+	Matriz = (float**)malloc(linhas*sizeof(float*));
 	for (i = 0; i < linhas; ++i)
 	{
-		Matriz[i] = (int*)malloc(colunas*sizeof(int));
+		Matriz[i] = (float*)malloc(colunas*sizeof(float));
+
 	}
 
 	return Matriz;
 }
 
-/*
-void DestruirMatriz(int linhas, int colunas, int Matriz[][]){
-  
- for (i = 0; i < linhas; ++i)
+void DestruirMatriz(float **Matriz,int linhas, int colunas) {
+
+	int i;
+
+	for (i = 0; i < linhas; ++i)
 	{
 		free(Matriz[i]);
 	};
 
 	free(Matriz);
+}
 
-}*/
-
-void ImprimirMatriz(No **Matriz, char nome[]) {
+void ImprimirMatriz(float **Matriz, int linhas, int colunas) {
 
 	int i, j;
-	No *encontrado = Percorre(Matriz, nome);
-
-	if (encontrado == NULL)
+	
+	for (i = 0; i < linhas; i++)
 	{
-		printf("Erro: Matriz nao encontrada\n\n");
-	}
-	else
-	{
-		for (i = 0; i < encontrado->linhas; i++)
+		for (j = 0; j < colunas; j++)
 		{
-			for (j = 0; j < encontrado->colunas; j++)
-			{
-				printf("%6.2d", encontrado->matriz[i][j]);
-			}
-			printf("\n");
+			printf("%6.2f", Matriz[i][j]);			
 		}
 		printf("\n");
 	}
+	printf("\n");
 }
 
-void AtribuirEleMatriz(No **Matriz, char nome[], int linha, int coluna, int n) {
+void AtribuirEleMatriz(float **Matriz, int linha, int coluna, float n) {
 
-	No *encontrado = Percorre(Matriz, nome);
-
-	if (encontrado == NULL)
-	{
-		printf("Erro: Matriz solicitada nao existe\n\n");
-	}
-	else if (linha > encontrado->linhas || coluna > encontrado->colunas)
-	{
-		printf("Erro: Posicao maior do que dimensoes\n\n");
-	}
-	else
-	{
-		encontrado->matriz[linha - 1][coluna - 1] = n;
-		printf("OK\n\n");
-	}
+	Matriz[linha - 1][coluna - 1] = n;
 }
 
 
-void AtribuirLinMatriz(){
+void AtribuirLinMatriz(float **Matriz, int linha, int quantidade, float n[]){
 
+	int i;
+
+	for (i = 0; i < quantidade; i++)
+	{
+		Matriz[linha-1][i] = n[i];
+	}
 
 }
 
 
-void AtribuirColMatriz(){
+void AtribuirColMatriz(float **Matriz, int coluna, int quantidade, float n[]){
 
+	int i;
 
+	for (i = 0; i < quantidade; i++)
+	{
+		Matriz[i][coluna - 1] = n[i];
+	}
 }
 
-void TransporMatriz(No **Matriz, char nome[], char nomeResultado[]) {
+float **TransporMatriz(float **Matriz, int linhas, int colunas) {
 
-	int **aux, i, j;
-	No *encontrada = Percorre(Matriz, nome);
+	float **aux;
+	int i, j;
 
-	aux = (int**)malloc(encontrada->colunas*sizeof(int*));
+	aux = (float**)malloc(linhas*sizeof(float*));
 
-	for (i = 0; i < encontrada->colunas; ++i)
+	for (i = 0; i < linhas; ++i)
 	{
-		aux[i] = (int*)malloc(encontrada->linhas*sizeof(int));
+		aux[i] = (float*)malloc(colunas*sizeof(float));
+
 	}
 
-	for (i = 0; i < encontrada->linhas; i++)
+	for (i = 0; i < linhas; i++)
 	{
-		for (j = 0; j < encontrada->colunas; j++)
+		for (j = 0; j < colunas; j++)
 		{
-			aux[j][i] = encontrada->matriz[i][j];
+			aux[i][j] = Matriz[j][i];
 		}
 	}
 
-	CriaNova(Matriz, aux, nomeResultado, encontrada->colunas, encontrada->linhas);
-	ImprimirMatriz(Matriz, nomeResultado);
+	return aux;
 }
 
-void SomarMatriz(No **Matriz, char nomePrimeira[], char nomeSegunda[], char Resultante[]) {
+float **SomarMatriz(float **Matriz1,float **Matriz2, int linhas, int colunas) {
 
-	int **aux, i, j;
+	float **aux;
+	int i, j;
+		
+		aux = (float**)malloc(linhas*sizeof(float*));
 
-	No *encontrada1 = Percorre(Matriz, nomePrimeira);
-	No *encontrada2 = Percorre(Matriz, nomeSegunda);
-
-	if (encontrada1 == NULL || encontrada2 == NULL)
-	{
-		printf("Erro: Uma das matrizes nao existe\n\n");
-	}
-	else if (Percorre(Matriz, Resultante) != NULL)
-	{
-		printf("Erro: Matriz resultante ja existe\n\n");
-	}
-	else if (encontrada1->linhas == encontrada2->linhas && encontrada1->colunas == encontrada2->colunas)
-	{
-		aux = (int**)malloc((encontrada1)->linhas*sizeof(int*));
-
-		for (i = 0; i < (encontrada1)->linhas; ++i)
+		for (i = 0; i < linhas; ++i)
 		{
-			aux[i] = (int*)malloc((encontrada1)->colunas*sizeof(int));
+			aux[i] = (float*)malloc(colunas*sizeof(float));
 		}
 
-		for (i = 0; i < (encontrada1)->linhas; i++)
+		for (i = 0; i < linhas; i++)
 		{
-			for (j = 0; j < (encontrada1)->colunas; j++)
+			for (j = 0; j < colunas; j++)
 			{
-				aux[i][j] = encontrada1->matriz[i][j] + encontrada2->matriz[i][j];
+				aux[i][j] = Matriz1[i][j] + Matriz2[i][j];
 			}
 		}
-		CriaNova(Matriz, aux, Resultante, (encontrada1)->linhas, (encontrada1)->colunas);
-		ImprimirMatriz(Matriz, Resultante);
-	}
-	else
-	{
-		printf("Erro: Dimensoes diferentes.\n\n");
-	}
-}
-
-void DividirMatriz(No **Matriz, char nomePrimeira[], char nomeSegunda[], char Resultante[]) {
-
-	int **aux, i, j, verifica0 = 0;
-
-	No *encontrada1 = Percorre(Matriz, nomePrimeira);
-	No *encontrada2 = Percorre(Matriz, nomeSegunda);
-
-	for (i = 0; i < encontrada1->linhas; i++)
-	{
-		for (j = 0; j < encontrada1->colunas; j++)
-		{
-			if (encontrada2->matriz[i][j] == 0)
-			{
-				verifica0 = 1;
-			}
-		}
-	}
-
-	if (encontrada1 == NULL || encontrada2 == NULL)
-	{
-		printf("Erro: Uma das matrizes nao existe\n\n");
-	}
-	else if (Percorre(Matriz, Resultante) != NULL)
-	{
-		printf("Erro: Matriz resultante ja existe\n\n");
-	}
-	else if (verifica0 != 0)
-	{
-		printf("Erro: Segunda matriz contem zeros\n\n");
-	}
-	else if (encontrada1->linhas == encontrada2->linhas && encontrada1->colunas == encontrada2->colunas)
-	{
-		aux = (int**)malloc((encontrada1)->linhas*sizeof(int*));
-
-		for (i = 0; i < (encontrada1)->linhas; ++i)
-		{
-			aux[i] = (int*)malloc((encontrada1)->colunas*sizeof(int));
-		}
-
-		for (i = 0; i < (encontrada1)->linhas; i++)
-		{
-			for (j = 0; j < (encontrada1)->colunas; j++)
-			{
-				aux[i][j] = encontrada1->matriz[i][j] / encontrada2->matriz[i][j];
-			}
-		}
-		CriaNova(Matriz, aux, Resultante, (encontrada1)->linhas, (encontrada1)->colunas);
-		ImprimirMatriz(Matriz, Resultante);
-	}
-	else
-	{
-		printf("Erro: Dimensoes diferentes.\n\n");
-	}
+		return aux;
 
 }
 
-void MultiplicarMatriz(No **Matriz, char nomePrimeira[], char nomeSegunda[], char Resultante[]) {
+float **DividirMatriz(float **Matriz1, float **Matriz2, int linhas, int colunas) {
 
-	int **aux, i, j;
+	float **aux;
+	int i, j;
 
-	No *encontrada1 = Percorre(Matriz, nomePrimeira);
-	No *encontrada2 = Percorre(Matriz, nomeSegunda);
+	aux = (float**)malloc(linhas*sizeof(float*));
 
-	if (encontrada1 == NULL || encontrada2 == NULL)
+	for (i = 0; i < linhas; ++i)
 	{
-		printf("Erro: Uma das matrizes nao existe\n\n");
+		aux[i] = (float*)malloc(colunas*sizeof(float));
 	}
-	else if (Percorre(Matriz, Resultante) != NULL)
-	{
-		printf("Erro: Matriz resultante ja existe\n\n");
-	}
-	else if (encontrada1->colunas == encontrada2->linhas)
-	{
-		aux = (int**)malloc((encontrada1)->linhas*sizeof(int*));
 
-		for (i = 0; i < (encontrada1)->linhas; ++i)
+	for (i = 0; i < linhas; i++)
+	{
+		for (j = 0; j < colunas; j++)
 		{
-			aux[i] = (int*)malloc((encontrada2)->colunas*sizeof(int));
+			aux[i][j] = Matriz1[i][j] / Matriz2[i][j];
+		}
+	}
+	return aux;
+
+}
+
+float **MultiplicarMatriz(float **Matriz1, float **Matriz2, int linhas1, int colunas2, int Colunas1Linhas2) {
+
+	float **aux, auxi;
+	int i, j, k;
+
+		aux = (float**)malloc(linhas1*sizeof(float*));
+
+		for (i = 0; i < linhas1; ++i)
+		{
+			aux[i] = (float*)malloc(colunas2*sizeof(float));
 		}
 
-		int k, auxi;
-
-		for (i = 0; i < (encontrada1)->linhas; i++)
+		for (i = 0; i < linhas1; i++)
 		{
-			for (j = 0; j < (encontrada2)->colunas; j++)
+			for (j = 0; j < colunas2; j++)
 			{
 				auxi = 0;
-				for (k = 0; k < encontrada2->linhas; k++)
+				for (k = 0; k < Colunas1Linhas2; k++)
 				{
-					auxi = auxi + (encontrada1->matriz[i][k] * encontrada2->matriz[k][j]);
+					auxi = auxi + (Matriz1[i][k] * Matriz2[k][j]);
 				}
 
 				aux[i][j] = auxi;
 			}
 		}
 
-		CriaNova(Matriz, aux, Resultante, (encontrada1)->linhas, (encontrada2)->colunas);
-		ImprimirMatriz(Matriz, Resultante);
-	}
-	else
-	{
-		printf("Erro: Dimensoes diferentes.\n\n");
-	}
-
+		return aux;
 }
 
-void Multiplicar2Matrizes(No **Matriz, char nomePrimeira[], char nomeSegunda[], char Resultante[]) {
+float **Multiplicar2Matrizes(float **Matriz1, float **Matriz2, int linhas, int colunas) {
 
-	int **aux, i, j;
+	float **aux;
+	int i, j;
 
-	No *encontrada1 = Percorre(Matriz, nomePrimeira);
-	No *encontrada2 = Percorre(Matriz, nomeSegunda);
+	aux = (float**)malloc(linhas*sizeof(float*));
 
-	if (encontrada1 == NULL || encontrada2 == NULL)
+	for (i = 0; i < linhas; ++i)
 	{
-		printf("Erro: Uma das matrizes nao existe\n\n");
+		aux[i] = (float*)malloc(colunas*sizeof(float));
 	}
-	else if (Percorre(Matriz, Resultante) != NULL)
-	{
-		printf("Erro: Matriz resultante ja existe\n\n");
-	}
-	else if (encontrada1->linhas == encontrada2->linhas && encontrada1->colunas == encontrada2->colunas)
-	{
-		aux = (int**)malloc((encontrada1)->linhas*sizeof(int*));
 
-		for (i = 0; i < (encontrada1)->linhas; ++i)
+	for (i = 0; i < linhas; i++)
+	{
+		for (j = 0; j < colunas; j++)
 		{
-			aux[i] = (int*)malloc((encontrada1)->colunas*sizeof(int));
+			aux[i][j] = Matriz1[i][j] * Matriz2[i][j];
 		}
-
-		for (i = 0; i < (encontrada1)->linhas; i++)
-		{
-			for (j = 0; j < (encontrada1)->colunas; j++)
-			{
-				aux[i][j] = encontrada1->matriz[i][j] * encontrada2->matriz[i][j];
-			}
-		}
-		CriaNova(Matriz, aux, Resultante, (encontrada1)->linhas, (encontrada1)->colunas);
-		ImprimirMatriz(Matriz, Resultante);
 	}
-	else
-	{
-		printf("Erro: Dimensoes diferentes.\n\n");
-	}
+	return aux;
 }
