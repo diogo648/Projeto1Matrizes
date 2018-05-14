@@ -46,12 +46,20 @@ void AdicionarNo(No **Lista, float **matrizNova, char nome[], int linha, int col
 {
 	if (*Lista == NULL) {
 		No *aux = (No*)malloc(sizeof(No));
-		strcpy(aux->nomeMatriz, nome);
-		aux->linhas = linha;
-		aux->colunas = coluna;
-		aux->matriz = matrizNova;
-		aux->prox = NULL;
-		*Lista = aux;
+
+		if(!aux)
+		{
+		   printf("Erro: Heap Overflow\n");
+		}
+		else
+		{
+		  strcpy(aux->nomeMatriz, nome);
+		  aux->linhas = linha;
+		  aux->colunas = coluna;
+		  aux->matriz = matrizNova;
+		  aux->prox = NULL;
+		  *Lista = aux;
+		}
 	}
 	else {
 		AdicionarNo(&(*Lista)->prox, matrizNova, nome, linha, coluna);
