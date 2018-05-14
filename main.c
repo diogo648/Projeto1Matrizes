@@ -1,3 +1,8 @@
+//Nome: Diogo Christovão Cortez
+//RA: 120349102
+//Nome Marcelino Noguero de Souza
+//RA: 16011538
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
